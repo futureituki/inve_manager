@@ -14,6 +14,8 @@ export default function Home() {
     test()
   },[])
   return (
-    <div>Hello</div>
+    <div>
+      投資管理アプリです
+    </div>
   )
 }
