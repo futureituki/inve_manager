@@ -1,9 +1,9 @@
 export interface Msg {
-  message:string
+  message: string;
 }
 export interface Csrf {
-  csrfToken:string
+  csrfToken: string;
 }
 export interface Jwt {
-  accessToken:string
+  accessToken: string;
 }

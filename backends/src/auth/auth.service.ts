@@ -2,7 +2,7 @@ import { ForbiddenException, Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { JwtService } from '@nestjs/jwt';
 import { PrismaClientKnownRequestError } from '@prisma/client/runtime';
-import * as bcrypt from 'bcrypt'
+import * as bcrypt from 'bcrypt';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { AuthDto } from './dto/auth.dto';
 import { Jwt, Msg } from './interfaces/auth.interface';
@@ -10,54 +10,54 @@ import { Jwt, Msg } from './interfaces/auth.interface';
 @Injectable()
 export class AuthService {
   constructor(
-    private readonly prisma:PrismaService,
-    private readonly jwt:JwtService,
-    private readonly config:ConfigService,
+    private readonly prisma: PrismaService,
+    private readonly jwt: JwtService,
+    private readonly config: ConfigService,
   ) {}
-  async singUp(dto:AuthDto):Promise<Msg> {
+  async singUp(dto: AuthDto): Promise<Msg> {
     const hashed = await bcrypt.hash(dto.password, 12);
     try {
       await this.prisma.user.create({
         data: {
-          email:dto.email,
-          hashedPassword:hashed
-        }
-      })
+          email: dto.email,
+          hashedPassword: hashed,
+        },
+      });
       return {
-        message:'ok'
-      }
-    } catch(error) {
+        message: 'ok',
+      };
+    } catch (error) {
       if (error instanceof PrismaClientKnownRequestError) {
         if (error.code === 'P2002') {
-          throw new ForbiddenException('This email is already taken')
+          throw new ForbiddenException('This email is already taken');
         }
       }
-      throw error
+      throw error;
     }
   }
-  async login(dto:AuthDto):Promise<Jwt> {
-      const user = await this.prisma.user.findUnique({
-        where:{
-          email:dto.email
-        }
-      })
-      if(!user) throw new ForbiddenException('')
-      const isValid = await bcrypt.compare(dto.password, user.hashedPassword)
-      if(!isValid) throw new ForbiddenException('')
-      return this.generateJwt(user.id, user.email)
+  async login(dto: AuthDto): Promise<Jwt> {
+    const user = await this.prisma.user.findUnique({
+      where: {
+        email: dto.email,
+      },
+    });
+    if (!user) throw new ForbiddenException('');
+    const isValid = await bcrypt.compare(dto.password, user.hashedPassword);
+    if (!isValid) throw new ForbiddenException('');
+    return this.generateJwt(user.id, user.email);
   }
-  async generateJwt(userId:number, email:string):Promise<Jwt> {
+  async generateJwt(userId: number, email: string): Promise<Jwt> {
     const payload = {
-      sub:userId,
-      email
-    }
-    const secret = this.config.get('JWT_SECRET')
+      sub: userId,
+      email,
+    };
+    const secret = this.config.get('JWT_SECRET');
     const token = await this.jwt.signAsync(payload, {
-      expiresIn:'10m',
-      secret:secret
-    })
+      expiresIn: '10m',
+      secret: secret,
+    });
     return {
-      accessToken:token
-    }
+      accessToken: token,
+    };
   }
 }

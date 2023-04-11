@@ -7,9 +7,9 @@ import { UserService } from './user.service';
 @UseGuards(AuthGuard('jwt'))
 @Controller('user')
 export class UserController {
-  constructor(private readonly userService:UserService) {}
+  constructor(private readonly userService: UserService) {}
   @Get()
-  getLoginUser(@Req() req:Request): Omit<User, 'hashedPassword'> {
-    return req.user
+  getLoginUser(@Req() req: Request): Omit<User, 'hashedPassword'> {
+    return req.user;
   }
 }
