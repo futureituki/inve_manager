@@ -36,7 +36,11 @@ export const BasicTables: FC<Props> = ({ tasks }) => {
           return (
             <tr {...row.getRowProps()} className='text-center' key={i}>
               {row.cells.map((cell, i) => {
-                return <td {...cell.getCellProps()} key={i}>{cell.render('Cell')}</td>
+                return (
+                  <td {...cell.getCellProps()} key={i}>
+                    {cell.render('Cell')}
+                  </td>
+                )
               })}
             </tr>
           )
