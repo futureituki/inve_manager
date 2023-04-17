@@ -9,10 +9,9 @@ export class TaskService {
     private readonly prisma:PrismaService
   ){}
   async create(dto:TaskDto, userId:number):Promise<Task> {
-    console.log(dto)
     const task = await this.prisma.task.create({
       data: {
-        userId,
+        userId:Number(userId),
         counterparty:dto.counterparty,
         period:Number(dto.period),
         capital:Number(dto.capital),
@@ -25,7 +24,7 @@ export class TaskService {
   async getAll(userId:number):Promise<Task[]> {
     const tasks = await this.prisma.task.findMany({
       where: {
-        userId
+        userId:Number(userId)
       }
     })
     return tasks
