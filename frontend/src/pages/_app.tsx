@@ -9,7 +9,6 @@ export default function App({ Component, pageProps }: AppProps) {
     const getCsrfToken = async () => {
       const { data } = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/auth/csrf`)
       axios.defaults.headers.common['csrf-token'] = data.csrfToken
-      console.log(data)
     }
     getCsrfToken()
   }, [])
