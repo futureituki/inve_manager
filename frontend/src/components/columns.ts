@@ -1,4 +1,4 @@
-import { format } from "date-fns";
+import { format } from 'date-fns'
 
 export const COLUMNS: any[] = [
   {
@@ -29,9 +29,9 @@ export const COLUMNS: any[] = [
     Header: '取引日時',
     accessor: 'transactionDate',
     Footer: '取引日時',
-    Cell: ({ value } : { value:Date }) => {
-      return format(new Date(value), 'yyyy-MM-dd');
-    }
+    Cell: ({ value }: { value: Date }) => {
+      return format(new Date(value), 'yyyy-MM-dd')
+    },
     // Filter: ColumnFilter
   },
 ]

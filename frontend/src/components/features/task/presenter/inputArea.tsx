@@ -1,7 +1,7 @@
+import { Task } from '@prisma/client'
 import { FC } from 'react'
 import { Control, Field, FieldValues, UseControllerProps, UseFormRegister } from 'react-hook-form'
 import { RhfTextArea } from '@/components/rhfField'
-import { Task } from '@prisma/client'
 
 export type RhfTextAreaProps<T extends FieldValues> = Field & UseControllerProps<T>
 // type TaskProperty<Task, K extends keyof Task> = Task[K] extends null | undefined ? never : Task[K];

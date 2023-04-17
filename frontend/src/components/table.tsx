@@ -1,9 +1,7 @@
-import { fetcher } from '@/lib/swr'
 import { Task } from '@prisma/client'
 import { FC, useMemo } from 'react'
-import useSWR from 'swr'
-import { COLUMNS } from './columns'
-import { Column, useTable } from 'react-table'
+import { useTable } from 'react-table'
+import { COLUMNS } from '@/components/columns'
 
 type Props = {
   tasks: Task[]
@@ -21,10 +19,12 @@ export const BasicTables: FC<Props> = ({ tasks }) => {
   return (
     <table {...getTableProps()}>
       <thead>
-        {headerGroups.map((headerGroup) => (
-          <tr {...headerGroup.getHeaderGroupProps()}>
-            {headerGroup.headers.map((column) => (
-              <th {...column.getHeaderProps()} className="p-2">{column.render('Header')}</th>
+        {headerGroups.map((headerGroup, i) => (
+          <tr {...headerGroup.getHeaderGroupProps()} key={i}>
+            {headerGroup.headers.map((column, i) => (
+              <th {...column.getHeaderProps()} className='p-2' key={i}>
+                {column.render('Header')}
+              </th>
             ))}
           </tr>
         ))}
@@ -34,9 +34,9 @@ export const BasicTables: FC<Props> = ({ tasks }) => {
         {rows.map((row, i) => {
           prepareRow(row)
           return (
-          <tr {...row.getRowProps()} className="text-center" key={i}>
-              {row.cells.map((cell) => {
-                return <td {...cell.getCellProps()}>{cell.render('Cell')}</td>
+            <tr {...row.getRowProps()} className='text-center' key={i}>
+              {row.cells.map((cell, i) => {
+                return <td {...cell.getCellProps()} key={i}>{cell.render('Cell')}</td>
               })}
             </tr>
           )

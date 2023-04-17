@@ -1,11 +1,11 @@
+import { Task } from '@prisma/client'
 import axios from 'axios'
 import { useRouter } from 'next/router'
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
+import { Wrapper } from '@/components/features/auth/presenter/wrapper'
 import { ButtonArea } from '@/components/features/task/presenter/buttonArea'
 import { InputArea } from '@/components/features/task/presenter/inputArea'
-import { Wrapper } from '@/components/features/auth/presenter/wrapper'
-import { Task } from '@prisma/client'
 import { Header } from '@/components/header'
 
 export const TaskContainer = () => {
