@@ -1,4 +1,12 @@
-import { Body, Controller, Get, Post, Put, Req, UseGuards } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  Post,
+  Put,
+  Req,
+  UseGuards,
+} from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { Task } from '@prisma/client';
 import { Request } from 'express';
@@ -8,15 +16,13 @@ import { TaskService } from './task.service';
 @UseGuards(AuthGuard('jwt'))
 @Controller('task')
 export class TaskController {
-  constructor(
-    private readonly service:TaskService,
-  ){}
+  constructor(private readonly service: TaskService) {}
   @Post()
-  createTask(@Req() req:Request, @Body() dto:TaskDto):Promise<Task> {
-      return this.service.create(dto, req.user.id)
+  createTask(@Req() req: Request, @Body() dto: TaskDto): Promise<Task> {
+    return this.service.create(dto, Number(req.user.id));
   }
   @Get()
-  getAllTasks(@Req() req:Request):Promise<Task[]> {
-    return this.service.getAll(req.user.id)
+  getAllTasks(@Req() req: Request): Promise<Task[]> {
+    return this.service.getAll(Number(req.user.id));
   }
 }

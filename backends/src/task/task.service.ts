@@ -5,29 +5,27 @@ import { TaskDto } from './dto/task.dto';
 
 @Injectable()
 export class TaskService {
-  constructor(
-    private readonly prisma:PrismaService
-  ){}
-  async create(dto:TaskDto, userId:number):Promise<Task> {
+  constructor(private readonly prisma: PrismaService) {}
+  async create(dto: TaskDto, userId: number): Promise<Task> {
     const task = await this.prisma.task.create({
       data: {
-        userId:Number(userId),
-        counterparty:dto.counterparty,
-        period:Number(dto.period),
-        capital:Number(dto.capital),
-        rate:Number(dto.rate),
-        transactionDate:new Date(dto.transactionDate),
-      }
-    })
-    return task
+        userId,
+        counterparty: dto.counterparty,
+        period: Number(dto.period),
+        capital: Number(dto.capital),
+        rate: Number(dto.rate),
+        transactionDate: new Date(dto.transactionDate),
+      },
+    });
+    return task;
   }
-  async getAll(userId:number):Promise<Task[]> {
+  async getAll(userId: number): Promise<Task[]> {
     const tasks = await this.prisma.task.findMany({
       where: {
-        userId:Number(userId)
-      }
-    })
-    return tasks
+        userId,
+      },
+    });
+    return tasks;
   }
   //一月ごとの取引取得
 }

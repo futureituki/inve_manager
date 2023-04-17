@@ -1,19 +1,19 @@
-import { IsDate, IsNotEmpty, IsNumber, IsString } from "class-validator";
+import { IsDate, IsNotEmpty, IsNumber, IsString } from 'class-validator';
 
 export class TaskDto {
   @IsNotEmpty()
   @IsString()
-  counterparty:string
+  counterparty: string;
 
   @IsNotEmpty()
-  capital:number
+  capital: number;
 
   @IsNotEmpty()
-  period:number
+  period: number;
 
   @IsNotEmpty()
-  rate:number
+  rate: number;
 
   @IsNotEmpty()
-  transactionDate:Date
+  transactionDate: Date;
 }
