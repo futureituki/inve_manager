@@ -13,8 +13,7 @@ export type RhfTextAreaProps<T extends FieldValues> = Field & UseControllerProps
  * react-hook-formラッパー
  */
 export const RhfTextArea = <T extends FieldValues>(props: RhfTextAreaProps<T>) => {
-  const { name, control, placeholder } = props
-  console.log(name)
+  const { name, control, placeholder, type } = props
   const {
     field: { ref, ...rest },
     formState: { errors },
@@ -22,7 +21,7 @@ export const RhfTextArea = <T extends FieldValues>(props: RhfTextAreaProps<T>) =
   return (
     <FieldArea
       placeholder={placeholder}
-      type={name}
+      type={type ? type : name}
       {...rest}
       error={errors[name] && `${(errors[name] as DeepMap<FieldValues, FieldError>).message}`}
     />

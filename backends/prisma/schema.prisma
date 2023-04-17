@@ -21,13 +21,12 @@ model User {
 
 model Task {
   id Int @id @default(autoincrement())
-  amount Int // 取引額
   capital Int // 元金
   period Int // 期間
   transactionDate DateTime // 取引日時
   counterparty String // 取引相手
   rate Int // 利率
-  continue Boolean
+  continue Boolean @default(true)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt 
   userId Int 

@@ -9,13 +9,12 @@ datasource db {
 
 model Task {
   id              Int      @id @default(autoincrement())
-  amount          Int
   capital         Int
   period          Int
   transactionDate DateTime
   counterparty    String
   rate            Int
-  continue        Boolean
+  continue        Boolean  @default(true)
   createdAt       DateTime @default(now())
   updatedAt       DateTime
   userId          Int

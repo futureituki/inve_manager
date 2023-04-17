@@ -3,6 +3,7 @@ import type { ChangeEventHandler } from 'react'
 export type Field = {
   error?: string
   placeholder?: string
+  type?: string
 }
 
 export const FieldArea = (
@@ -15,7 +16,7 @@ export const FieldArea = (
   return (
     <>
       <label className='block text-gray-700 text-sm font-bold mb-2' htmlFor={props.type}>
-        {props.type}
+        {props.type === 'date' ? props.placeholder : ''}
       </label>
       <input
         placeholder={props.placeholder}

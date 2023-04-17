@@ -1,11 +1,5 @@
 import { FC } from 'react'
-import {
-  Control,
-  Field,
-  FieldValues,
-  UseControllerProps,
-  UseFormRegister,
-} from 'react-hook-form'
+import { Control, Field, FieldValues, UseControllerProps, UseFormRegister } from 'react-hook-form'
 import { RhfTextArea } from '@/components/rhfField'
 import { AuthLogin } from '@/types'
 
