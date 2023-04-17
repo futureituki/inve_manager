@@ -1,13 +1,16 @@
 import axios from 'axios'
 import { useRouter } from 'next/router'
-import { useState } from 'react'
+import { FC, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { ButtonArea } from '@/components/features/auth/presenter/buttonArea'
 import { InputArea } from '@/components/features/auth/presenter/inputArea'
 import { Wrapper } from '@/components/features/auth/presenter/wrapper'
 import { AuthLogin } from '@/types'
 
-export const AuthContainer = () => {
+type Props = {
+  sign?: boolean
+}
+export const AuthContainer: FC<Props> = ({ sign }) => {
   const router = useRouter()
   const [error, setError] = useState<string>('')
   const {
@@ -20,11 +23,19 @@ export const AuthContainer = () => {
   })
   const handle = async (data: AuthLogin) => {
     try {
-      await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/auth/login`, {
-        email: data.email,
-        password: data.password,
-      })
-      router.push('/')
+      if (sign) {
+        await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/auth/signup`, {
+          email: data.email,
+          password: data.password,
+        })
+        router.push('/login')
+      } else {
+        await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/auth/login`, {
+          email: data.email,
+          password: data.password,
+        })
+        router.push('/')
+      }
     } catch (e: any) {
       setError(e.response.data.message)
     }
@@ -76,7 +87,7 @@ export const AuthContainer = () => {
             name='password'
           />
         </div>
-        <ButtonArea />
+        <ButtonArea sign={sign} />
       </form>
     </Wrapper>
   )

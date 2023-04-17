@@ -9,8 +9,7 @@ type Props = {
 
 export const BasicTables: FC<Props> = ({ tasks }) => {
   const columns = useMemo(() => COLUMNS, [])
-  const data = useMemo(() => tasks, [])
-
+  const data = tasks
   const { getTableProps, getTableBodyProps, headerGroups, footerGroups, rows, prepareRow } =
     useTable({
       columns,
