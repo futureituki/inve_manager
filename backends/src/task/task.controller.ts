@@ -2,6 +2,7 @@ import {
   Body,
   Controller,
   Get,
+  Param,
   Post,
   Put,
   Req,
@@ -24,5 +25,12 @@ export class TaskController {
   @Get()
   getAllTasks(@Req() req: Request): Promise<Task[]> {
     return this.service.getAll(Number(req.user.id));
+  }
+  @Get(':date')
+  getDateTasks(
+    @Param('date') date: string,
+    @Req() req: Request,
+  ): Promise<Task[]> {
+    return this.service.getMonthlyTask(Number(req.user.id), date);
   }
 }

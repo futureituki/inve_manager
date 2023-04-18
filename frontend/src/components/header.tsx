@@ -1,6 +1,7 @@
 import { HomeIcon } from '@heroicons/react/24/solid'
 import Link from 'next/link'
 import { IconWrapper } from '@/components/icon'
+import { Logout } from '@/components/logout'
 
 export const Header = () => {
   return (
@@ -14,6 +15,7 @@ export const Header = () => {
             取引を作成する
           </p>
         </Link>
+        <Logout />
       </IconWrapper>
     </header>
   )

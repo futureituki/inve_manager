@@ -28,4 +28,19 @@ export class TaskService {
     return tasks;
   }
   //一月ごとの取引取得
+  async getMonthlyTask(userId: number, date: string): Promise<Task[]> {
+    const formatted = `${new Date(date).getFullYear()}-${
+      new Date(date).getMonth() + 2 === 13 ? 1 : new Date(date).getMonth() + 2
+    }-01`;
+    const tasks = await this.prisma.task.findMany({
+      where: {
+        userId,
+        transactionDate: {
+          gte: new Date(date),
+          lt: new Date(formatted),
+        },
+      },
+    });
+    return tasks;
+  }
 }

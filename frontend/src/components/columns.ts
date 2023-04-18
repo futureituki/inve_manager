@@ -29,6 +29,7 @@ export const COLUMNS: any[] = [
     Header: '取引日時',
     accessor: 'transactionDate',
     Footer: '取引日時',
+    sortTypes: 'datetime',
     Cell: ({ value }: { value: Date }) => {
       return format(new Date(value), 'yyyy-MM-dd')
     },

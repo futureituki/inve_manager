@@ -17,7 +17,7 @@ export const AuthContainer: FC<Props> = ({ sign }) => {
     control,
     handleSubmit,
     register,
-    formState: { isValid },
+    formState: { isValid, isSubmitting },
   } = useForm<AuthLogin>({
     mode: 'onChange',
   })
@@ -87,7 +87,7 @@ export const AuthContainer: FC<Props> = ({ sign }) => {
             name='password'
           />
         </div>
-        <ButtonArea sign={sign} />
+        <ButtonArea sign={sign} isLoading={isSubmitting} />
       </form>
     </Wrapper>
   )
